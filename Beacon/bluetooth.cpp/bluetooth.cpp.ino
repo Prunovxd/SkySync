@@ -13,8 +13,8 @@ const uint64_t address = 0xF0F0F0F0E1LL; // Адрес для передачи
 // Данные для отправки
 String text = "NULL";
 String BTText = "NULL";
-String CordsX = "55.727980";
-String CordsY = "37.607092";
+String CordsX = "NULL";
+String CordsY = "NULL";
 String DestinationX = "NULL";
 String DestinationY = "NULL";
 String Customer_FullName = "NULL";

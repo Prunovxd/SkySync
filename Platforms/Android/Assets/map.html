@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор точки на карте Яндекс</title>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=e8c7082e-59e5-4d03-b09b-6cbaecc5802e" type="text/javascript"></script>
+</head>
+<body>
+    <h2>Выберите точку на карте Яндекс</h2>
+    <div id="map" style="width: 100%; height: 500px;"></div>
+
+    <script type="text/javascript">
+        // Инициализация карты Яндекс
+        ymaps.ready(function () {
+            var map = new ymaps.Map("map", {
+                center: [55.7558, 37.6176], // Начальная позиция карты (Москва)
+                zoom: 10
+            });
+
+            // Переменная для хранения маркера
+            var placemark;
+
+            // Обработчик клика на карту
+            map.events.add('click', function (e) {
+                var coords = e.get('coords'); // Получаем координаты клика
+                var latitude = coords[0];
+                var longitude = coords[1];
+
+                // Если маркер уже существует, удаляем его
+                if (placemark) {
+                    map.geoObjects.remove(placemark);
+                }
+
+                // Создаем новый маркер на выбранной точке
+                placemark = new ymaps.Placemark(coords, {
+                    balloonContent: 'Вы выбрали точку: ' + latitude.toFixed(6) + ', ' + longitude.toFixed(6)
+                });
+                map.geoObjects.add(placemark);
+
+                // Окно подтверждения выбора
+                var confirmChoice = confirm("Вы хотите выбрать эту точку?\nШирота: " + latitude.toFixed(6) + "\nДолгота: " + longitude.toFixed(6));
+                if (confirmChoice) {
+                    // Отправляем координаты обратно в приложение через URL
+                    window.location.href = "setCoordinates?" + latitude + "," + longitude;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

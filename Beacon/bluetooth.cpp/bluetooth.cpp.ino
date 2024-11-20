@@ -99,10 +99,10 @@ void loop() {
 void sendDataStep() {
   switch (sendState) {
     case 0:
-      text = "!" + CordsX + String(random(61)) + ";";
+      text = "!" + CordsX + ";";
       break;
     case 1:
-      text = CordsY + String(random(61)) + ";";
+      text = CordsY + ";";
       break;
     case 2:
       text = DestinationX + ";";
